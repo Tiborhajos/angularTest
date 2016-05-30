@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularTest">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular test</title>
+    <script type="text/javascript" src="angular-1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+</head>
+
+<body ng-controller="ShopController as shop">
+<div>
+    <div ng-repeat="product in shop.products">
+        <h1>{{product.name}}</h1>
+
+        <h2>{{product.price | currency}}</h2>
+        <img src={{product.imgUrl}} style="width: 400px;"/>
+
+        <p>{{product.description}}</p>
+
+        <div ng-controller="PanelController as panel">
+            <ul class="nav nav-pills">
+                <li ng-class="{active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+                <li ng-class="{active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specifications</a>
+                </li>
+                <li ng-class="{active: panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+            </ul>
+
+
+            <div class="panel" ng-show="panel.isSelected(1)">
+                <h4>Description</h4>
+                <p>{{product.description}}</p>
+            </div>
+
+            <div class="panel" ng-show="panel.isSelected(2)">
+                <h4>Specifications</h4>
+                <p>{{product.specifications}}</p>
+            </div>
+
+            <div class="panel" ng-show="panel.isSelected(3)">
+                <h4>Reviews</h4>
+                <p>None yet.</p>
+            </div>
+
+            <button ng-show="product.inStock">Add to basket</button>
+
+            <p>Current tab: {{tab}}</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
